@@ -4,6 +4,7 @@ class fileView {
     public $cat;
     public $catImg;
     public $fileSave;
+    public $file;
 
     public function __construct($cat, $catImg, $file) {
         $this->cat = $cat;
