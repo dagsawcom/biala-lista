@@ -1,0 +1,7 @@
+Options -Indexes
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^files/([a-zA-Z-_0-9]+)$ files.php?q=$1
+RewriteRule "^files/([a-zA-Z-_0-9]+)/([a-zA-Z-% _0-9]+)$" "files.php?q=$1&file=$2" [B,PT]
