@@ -1,24 +1,30 @@
 <?php
+ini_set( 'display_errors', 'On' ); 
+error_reporting( E_ALL );
 if (array_key_exists('HTTPS', $_SERVER) && $_SERVER["HTTPS"] == "on") {
 $htp = 'https';
 } else {
 $htp = 'http';
 }
 $htp0 = $htp."://";
+//phpinfo();
+$files = "biala-lista/";
+$files1 = $_SERVER['DOCUMENT_ROOT'].'/'.$files;
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <base href="<?php echo $htp0; ?>bl.scripts24.xyz/">
+    <base href="<?php echo $htp0.$_SERVER["HTTP_HOST"]; ?>/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="keywords" content="Wykaz podatników VAT, Wykaz podatników VAT z zapisem danych do pdf">
     <meta name="description" content="Darmowa biała lista z zapisywaniem danych do pdf">
     <title>Wykaz podatników VAT - wyszukiwarka</title>
-    <link rel="Stylesheet" type="text/css" href="css/app.css?t=<?php echo filemtime('css/app.css'); ?>" />
-    <script src="js/cal.js?t=<?php echo filemtime('js/cal.js'); ?>" async></script>
-    <script src="js/app.js?t=<?php echo filemtime('js/app.js'); ?>" async></script>
+    <link rel="Stylesheet" type="text/css" href="<?php echo $files; ?>css/app.css?t=<?php echo filemtime($files1.'css/app.css'); ?>" />
+    <script src="<?php echo $files; ?>js/cal.js?t=<?php echo filemtime($files1.'js/cal.js'); ?>" async></script>
+    <script src="<?php echo $files; ?>js/app.js?t=<?php echo filemtime($files1.'js/app.js'); ?>" async></script>
 </head>
 <body>
     <header></header>
