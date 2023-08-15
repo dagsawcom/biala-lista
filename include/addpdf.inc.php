@@ -31,6 +31,9 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/pdf/examples/tcpdf_include.php');
 //require_once('/home1/scriptss/pdf/examples/tcpdf_include.php');
 //require_once('/xampp/htdocs/pdf/examples/tcpdf_include.php');
 // create new PDF document
+define ('PDF_PAGE_ORIENTATION', 'P');
+define ('PDF_UNIT', 'mm');
+define ('PDF_PAGE_FORMAT', 'A4');
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 //$data=json_decode(file_get_contents('php://input'),1);
