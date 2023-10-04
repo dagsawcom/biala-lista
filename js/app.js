@@ -191,6 +191,8 @@ const pole = (k) => {
     if (elid("searchButton") != undefined) {
             elid("searchButton").addEventListener("click", () => {
             inputTypep(elid("inputType"));
+            const divm = cretorele("div", [[null,"className", "m-12"]]);
+            adde("filepdf", [["append", divm]]);
         });
     }
 
