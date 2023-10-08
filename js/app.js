@@ -183,15 +183,6 @@ const pole = (k) => {
         sendmu(check(elna("rdo")), val, dat);
     }
 
-    const files = (s, t) => {
-        if (t == 1) {
-        adde("filepdf", [["style", "display", s],[null, "innerHTML", ""]]);
-        } else {
-        adde("filepdf", [["style", "display", s]]);    
-        }
-        
-        //adde("filepdf", [[null, "value", ""]]);
-    }
 
     const filename = (id) => { 
         if (id == "null") {
@@ -225,7 +216,6 @@ const pole = (k) => {
     }
 
     const result1 = () => {  
-        //const filepdf = cretorele("div", [["set","id","filepdf"], [null,"className", "container"], ["append", filename()]]);
         const filepdf = cretorele("div", [["set","id","filename"]]);
         const result = cretorele("div", [["set","id","result"], [null,"className", "container"], ["append", radioform()], ["append", filepdf]]);
         const searchResultBox = cretorele("div", [["set","id","searchResultBox"]]);
@@ -287,29 +277,20 @@ const pole = (k) => {
             if (contf != null) {
                 contf.forEach((i) => {
                     i.addEventListener("click", () => {
-                        console.log(contf);
                         removattr(contf, "checked");
-                        console.log(contf);
                         stopTimes();
                         nf(i,id);
-                        //filename();
-                        /*adde("result1", [[null, "innerHTML", ""]]);
-                        
-                        inputType0(i);*/
                     });
                 });
             }
         }
 
         if (elna("nf")[0] != undefined) {
-            const contf = elna("nf");
-            
+            const contf = elna("nf");        
             if (contf != null) {
                 contf.forEach((i) => {
                     nf(i,id);
-                    //console.log(contf);
-                   /* 
-                    inputType0(i);*/
+
                 });
             }
         }
@@ -453,7 +434,6 @@ const pole = (k) => {
         divForm.appendChild(tableHeader());
 
         statinfo.forEach((s,i) => {
-            //console.log(s, i, info[s])
             if (s === "pesel") {
                 if (info[s] !== null) {
                     divForm.appendChild(tableAK(info[s], textp[i], null));
@@ -508,8 +488,6 @@ const pole = (k) => {
                         errorinfo(json.message);
                     } else {
                         if (json.result.subjects[0] != null) {
-                            //removed("errorBox");
-
                             successinfo(json.result.subjects[0], dat, json.result.requestId);
                         } else {
                             removed("result");
@@ -527,7 +505,6 @@ const pole = (k) => {
                         errorinfo(json.message);
                     } else {
                         if (json.result.subject != null) {
-                            //removed("errorBox");
                             successinfo(json.result.subject, dat, json.result.requestId);
                         } else {
                             console.log(json);
