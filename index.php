@@ -75,13 +75,7 @@ $files1 = $_SERVER['DOCUMENT_ROOT'].'/'.$files;
                         </div>
                     </div>                        
                 </div>
-                <div id="result">
-                    <div id="filepdf" class="container" style="display: none;">
-                    </div>
-
-                    <div id="searchResultBox" style="display: none;"></div>
-
-                    <div id="errorBox" style="display: none;"></div>
+                <div id="result1">
                 </div>
             </div>
         </div>

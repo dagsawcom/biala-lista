@@ -192,20 +192,27 @@ const pole = (k) => {
         //adde("filepdf", [[null, "value", ""]]);
     }
 
-    const modalcontent1a = () => { 
+    const filename = () => { 
         const input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"placeholder", "Nazwa przyszłego pliku"] ]);
         const label = cretorele("label", [["append", input]]);   
         const div0 = cretorele("div", [[null,"className", "form-container-selecta sizeInputForBigSize"], ["style", "position", "relative"], ["append", label]]);
         const button = cretorele("input", [[null,"type", "submit"], ["set","id","searchButton2"], [null,"className", "btn btn-primaryAk searchButtonClick"],[null, "innerHTML", "Generuj PDF"] ]);
         const div1 = cretorele("div", [[null,"className", "sendButtonAKa"], ["append", button]]);
-        return cretorele("div", [["set","id","ser"], [null,"className", "m-12"], ["append", div0], ["append", div1]]);
+        return cretorele("div", [[null,"className", "m-12"], ["append", div0], ["append", div1]]);
+    }
+
+    const result1 = () => {  
+        const filepdf = cretorele("div", [["set","id","filepdf"], [null,"className", "container"], ["append", filename()]]);
+        const result = cretorele("div", [["set","id","result"], ["append", filepdf]]);
+        const searchResultBox = cretorele("div", [["set","id","searchResultBox"]]);
+        return adde("result1", [["append", result], ["append", searchResultBox]]);
     }
 
     if (elid("searchButton") != undefined) {
             elid("searchButton").addEventListener("click", () => {
             inputTypep(elid("inputType"));
-            //removed("ser");
-            adde("filepdf", [["append", modalcontent1a()]]);
+            adde("result1", [[null, "innerHTML", ""]]);
+            result1()
             keyclick1a();
         });
     }
@@ -214,6 +221,9 @@ const pole = (k) => {
         elid("inputType").addEventListener("keydown", event => {    
             if (event.key == "Enter") {
                 inputTypep(elid("inputType"));
+                adde("result1", [[null, "innerHTML", ""]]);
+                result1()
+                keyclick1a();
             }
         });
     }
@@ -225,9 +235,7 @@ const pole = (k) => {
             contf.forEach((i) => {
                 i.addEventListener("click", () => {
                     removattr(contf, "checked");
-                    files("none", 1);
-                    adde("searchResultBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
-                    adde("errorBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
+                    adde("result1", [[null, "innerHTML", ""]]);
                     stopTimes();
                     rdo(i);
                     inputType0(i);
@@ -332,9 +340,6 @@ const pole = (k) => {
     const tableAK1 = (data, item, text) =>  tableadd(td("tableAKa"), tda("twofirst", twofirstb(text)), tda("twosecond", twosecondb(data, item)), td("tableAKa"), null);
 
     const successinfo = (info, dat, id) => {
-        adde("errorBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
-        adde("searchResultBox", [[null, "innerHTML", ""]]);
-        files("block", 0);
         stopTimes();
         timese();
 
@@ -392,19 +397,18 @@ const pole = (k) => {
     const div = cretorele("div", [[null,"className", "container boxSearc"], ["append", div0]]);
     divForm.appendChild(div);
 
-        adde("searchResultBox", [["append", divForm],["style", "display", "block"]]);
+        adde("searchResultBox", [["append", divForm]]);
     }
 
     const errorinfo = (info) => {
-        adde("searchResultBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
-        adde("errorBox", [[null, "innerHTML", ""]]);
-        files("none", 1);
+
         stopTimes();
 
         const errorh = cretorele("h4", [[null,"innerHTML", info]]);
         const divinfo = cretorele("div", [[null,"className", "tableHeaderAK error"], ["append", errorh]]);
         const divForm = cretorele("div", [["set","id", "tableOne"], [null,"className", "container"], ["append", divinfo]]);
-        adde("errorBox", [["append", divForm],["style", "display", "block"]]);
+        const errorBox = cretorele("div", [["set","id","errorBox"], ["append", divForm]]);
+        adde("result1", [["append", errorBox]]);
     }
 
     const sendmu = (type, val, dat) => {
@@ -415,23 +419,38 @@ const pole = (k) => {
             .then(response => response.json())
             .then(json => {
                 if (type === "bank-account") {
+                    console.log(json);
                     if (json.message != null) {
+                        removed("filepdf");
+                        removed("searchResultBox");
                         errorinfo(json.message);
                     } else {
                         if (json.result.subjects[0] != null) {
+                            //removed("errorBox");
+
                             successinfo(json.result.subjects[0], dat, json.result.requestId);
                         } else {
+                            removed("filepdf");
+                            removed("searchResultBox");
                             errorinfo("Rachunek nie figuruje na wykazie");
                         }
 
                     }
                 } else if ((type === "nip") || (type === "regon")) {
+                    
                     if (json.message != null) {
+                        console.log(json);
+                        removed(["filepdf"]);
+                        removed(["searchResultBox"]);
                         errorinfo(json.message);
                     } else {
                         if (json.result.subject != null) {
+                            //removed("errorBox");
                             successinfo(json.result.subject, dat, json.result.requestId);
                         } else {
+                            console.log(json);
+                            removed("filepdf");
+                            removed("searchResultBox");
                             errorinfo("Nie figuruje w rejestrze VAT");
                         }
                     }
