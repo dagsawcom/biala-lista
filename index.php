@@ -77,17 +77,6 @@ $files1 = $_SERVER['DOCUMENT_ROOT'].'/'.$files;
                 </div>
                 <div id="result">
                     <div id="filepdf" class="container" style="display: none;">
-                        <div class="m-12">
-                            <div class="form-container-selecta sizeInputForBigSize" style="position: relative;">
-                                <label>
-                                    <span class="hiden">Null</span>
-                                    <input type="text" id="files" name="files" class="input-form dateInput" placeholder="Nazwa przyszłego pliku">
-                                </label>
-                            </div>
-                            <div class="sendButtonAKa">
-                                <button type="submit" id="searchButton2" class="btn btn-primaryAk searchButtonClick">Generuj PDF</button>
-                            </div>
-                        </div>
                     </div>
 
                     <div id="searchResultBox" style="display: none;"></div>

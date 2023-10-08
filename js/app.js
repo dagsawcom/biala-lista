@@ -182,17 +182,31 @@ const pole = (k) => {
         sendmu(check(elna("rdo")), val, dat);
     }
 
-    const files = (s) => {
-        adde("filepdf", [["style", "display", s]]);
-        adde("files", [[null, "value", ""]]);
+    const files = (s, t) => {
+        if (t == 1) {
+        adde("filepdf", [["style", "display", s],[null, "innerHTML", ""]]);
+        } else {
+        adde("filepdf", [["style", "display", s]]);    
+        }
+        
+        //adde("filepdf", [[null, "value", ""]]);
     }
 
+    const modalcontent1a = () => { 
+        const input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"placeholder", "Nazwa przyszłego pliku"] ]);
+        const label = cretorele("label", [["append", input]]);   
+        const div0 = cretorele("div", [[null,"className", "form-container-selecta sizeInputForBigSize"], ["style", "position", "relative"], ["append", label]]);
+        const button = cretorele("input", [[null,"type", "submit"], ["set","id","searchButton2"], [null,"className", "btn btn-primaryAk searchButtonClick"],[null, "innerHTML", "Generuj PDF"] ]);
+        const div1 = cretorele("div", [[null,"className", "sendButtonAKa"], ["append", button]]);
+        return cretorele("div", [["set","id","ser"], [null,"className", "m-12"], ["append", div0], ["append", div1]]);
+    }
 
     if (elid("searchButton") != undefined) {
             elid("searchButton").addEventListener("click", () => {
             inputTypep(elid("inputType"));
-            const divm = cretorele("div", [[null,"className", "m-12"]]);
-            adde("filepdf", [["append", divm]]);
+            //removed("ser");
+            adde("filepdf", [["append", modalcontent1a()]]);
+            keyclick1a();
         });
     }
 
@@ -211,7 +225,7 @@ const pole = (k) => {
             contf.forEach((i) => {
                 i.addEventListener("click", () => {
                     removattr(contf, "checked");
-                    files("none");
+                    files("none", 1);
                     adde("searchResultBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
                     adde("errorBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
                     stopTimes();
@@ -320,7 +334,7 @@ const pole = (k) => {
     const successinfo = (info, dat, id) => {
         adde("errorBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
         adde("searchResultBox", [[null, "innerHTML", ""]]);
-        files("block");
+        files("block", 0);
         stopTimes();
         timese();
 
@@ -384,7 +398,7 @@ const pole = (k) => {
     const errorinfo = (info) => {
         adde("searchResultBox", [["style", "display", "none"],[null, "innerHTML", ""]]);
         adde("errorBox", [[null, "innerHTML", ""]]);
-        files("none");
+        files("none", 1);
         stopTimes();
 
         const errorh = cretorele("h4", [[null,"innerHTML", info]]);
@@ -445,13 +459,13 @@ const pole = (k) => {
         cretorfile(se, np, datt);
     }
 
-
+const keyclick1a = () => {
     if (elid("searchButton2") != undefined) {
             elid("searchButton2").addEventListener("click", () => {
             filec();
         });
     }
-
+}
     const keyclick1 = () => {
         if (elid("files") != undefined) {
             elid("files").addEventListener("keydown", event => {    
