@@ -485,17 +485,16 @@ const pole = (k) => {
             .then(response => response.json())
             .then(json => {
                 if (type === "bank-account") {
-                    console.log(json);
                     if (json.message != null) {
-                        removed("result");
-                        removed("searchResultBox");
+                        removed(["result"]);
+                        removed(["searchResultBox"]);
                         errorinfo(json.message);
                     } else {
                         if (json.result.subjects[0] != null) {
                             successinfo(json.result.subjects[0], dat, json.result.requestId);
                         } else {
-                            removed("result");
-                            removed("searchResultBox");
+                            removed(["result"]);
+                            removed(["searchResultBox"]);
                             errorinfo("Rachunek nie figuruje na wykazie");
                         }
 
@@ -503,7 +502,6 @@ const pole = (k) => {
                 } else if ((type === "nip") || (type === "regon")) {
                     
                     if (json.message != null) {
-                        console.log(json);
                         removed(["result"]);
                         removed(["searchResultBox"]);
                         errorinfo(json.message);
@@ -511,9 +509,8 @@ const pole = (k) => {
                         if (json.result.subject != null) {
                             successinfo(json.result.subject, dat, json.result.requestId);
                         } else {
-                            console.log(json);
-                            removed("result");
-                            removed("searchResultBox");
+                            removed(["result"]);
+                            removed(["searchResultBox"]);
                             errorinfo("Nie figuruje w rejestrze VAT");
                         }
                     }
