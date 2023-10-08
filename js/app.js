@@ -198,20 +198,24 @@ const pole = (k) => {
         return cretorele("div", [[null,"className", "m-12"], ["append", div0], ["append", div1]]);
     }
 
-    const radioform = () => {
+    const radioformlabel = (n, t, h) => {
 
-        const input0 = cretorele("input", [[null,"type", "radio"], ["set","id","nf1"], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", "identyfikator-wyszukiwania"], [null,"value", "identyfikator-wyszukiwania"], [null,"aria-label", "Identyfikator wyszukiwania"], [null,"title", "Identyfikator wyszukiwania"], [null,"checked", "checked"] ]);
-        const span0 = cretorele("span", [[null,"className", "control-label"], [null,"title", "Identyfikator wyszukiwania"]]);
-        const span0a = cretorele("span", [[null, "innerHTML", "Identyfikator wyszukiwania"]]);
-        const label0 = cretorele("label", [[null,"for", "opt2"], [null,"className", "radio-control-container"], [null,"title", "Identyfikator wyszukiwania"], ["append", input0], ["append", span0], ["append", span0a]]);
+        legend = elc("legend");
+        t.forEach((i, w) => {
+            if (w == 0) {ch = [null,"checked", "checked"] } else {ch = "" }
+            const input = cretorele("input", [[null,"type", "radio"], ["set","id",`${n}${w+1}`], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", `${t[w]}`], [null,"value", `${t[w]}`], [null,"aria-label", `${h[w]}`], [null,"title", `${h[w]}`], ch]);
+            const span = cretorele("span", [[null,"className", "control-label"], [null,"title", `${h[w]}`]]);
+            const spana = cretorele("span", [[null, "innerHTML", `${h[w]}`]]);
+            label = cretorele("label", [[null,"for", `${n}${w+1}`], [null,"className", "radio-control-container"], [null,"title", `${h[w]}`], ["append", input], ["append", span], ["append", spana]]);
+            legend.appendChild(label);
+        })
+ 
+        return legend;
+        
+    }
 
-        const input1 = cretorele("input", [[null,"type", "radio"], ["set","id","nf2"], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", "nazwa-przyszlego-pliku"], [null,"value", "nazwa-przyszlego-pliku"], [null,"aria-label", "Nazwa przyszłego pliku"], [null,"title", "Nazwa przyszłego pliku"]]);
-        const span1 = cretorele("span", [[null,"className", "control-label"], [null,"title", "Nazwa przyszłego pliku"]]);
-        const span1a = cretorele("span", [[null, "innerHTML", "Nazwa przyszłego pliku"]]);
-        const label1 = cretorele("label", [[null,"for", "opt2"], [null,"className", "radio-control-container"], [null,"title", "Nazwa przyszłego pliku"], ["append", input1], ["append", span1], ["append", span1a]]);
-
-        const legend = cretorele("legend", [["append", label0], ["append", label1]]);   
-        const fieldset = cretorele("fieldset", [["append", legend]]);   
+    const radioform = () => {  
+        const fieldset = cretorele("fieldset", [["append", radioformlabel("nf", ["identyfikator-wyszukiwania", "nazwa-przyszlego-pliku"], ["Identyfikator wyszukiwania", "Nazwa przyszłego pliku"])]]);   
         return cretorele("div", [[null,"className", "radio-form-control mt49"], ["append", fieldset]]);
     }
 
