@@ -114,6 +114,7 @@ const pole = (k) => {
     }
 
 
+
     const check = (l) => {
         if (l[0] != undefined) {
             if (l != null) {
@@ -192,8 +193,13 @@ const pole = (k) => {
         //adde("filepdf", [[null, "value", ""]]);
     }
 
-    const filename = () => { 
-        const input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"placeholder", "Nazwa przyszłego pliku"] ]);
+    const filename = (id) => { 
+        if (id == "null") {
+            input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"placeholder", "Nazwa przyszłego pliku"] ]);
+        } else {
+            input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"disabled", "disabled"], [null,"value", id]]);
+        }
+        
         const label = cretorele("label", [["append", input]]);   
         const div0 = cretorele("div", [[null,"className", "form-container-selecta sizeInputForBigSize"], ["style", "position", "relative"], ["append", label]]);
         const button = cretorele("input", [[null,"type", "submit"], ["set","id","searchButton2"], [null,"className", "btn btn-primaryAk searchButtonClick"],[null, "innerHTML", "Generuj PDF"] ]);
@@ -201,11 +207,29 @@ const pole = (k) => {
         return cretorele("div", [[null,"className", "m-12"], ["append", div0], ["append", div1]]);
     }
 
+    const radioform = () => {
+
+        const input0 = cretorele("input", [[null,"type", "radio"], ["set","id","nf1"], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", "identyfikator-wyszukiwania"], [null,"value", "identyfikator-wyszukiwania"], [null,"aria-label", "Identyfikator wyszukiwania"], [null,"title", "Identyfikator wyszukiwania"], [null,"checked", "checked"] ]);
+        const span0 = cretorele("span", [[null,"className", "control-label"], [null,"title", "Identyfikator wyszukiwania"]]);
+        const span0a = cretorele("span", [[null, "innerHTML", "Identyfikator wyszukiwania"]]);
+        const label0 = cretorele("label", [[null,"for", "opt2"], [null,"className", "radio-control-container"], [null,"title", "Identyfikator wyszukiwania"], ["append", input0], ["append", span0], ["append", span0a]]);
+
+        const input1 = cretorele("input", [[null,"type", "radio"], ["set","id","nf2"], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", "nazwa-przyszlego-pliku"], [null,"value", "nazwa-przyszlego-pliku"], [null,"aria-label", "Nazwa przyszłego pliku"], [null,"title", "Nazwa przyszłego pliku"]]);
+        const span1 = cretorele("span", [[null,"className", "control-label"], [null,"title", "Nazwa przyszłego pliku"]]);
+        const span1a = cretorele("span", [[null, "innerHTML", "Nazwa przyszłego pliku"]]);
+        const label1 = cretorele("label", [[null,"for", "opt2"], [null,"className", "radio-control-container"], [null,"title", "Nazwa przyszłego pliku"], ["append", input1], ["append", span1], ["append", span1a]]);
+
+        const legend = cretorele("legend", [["append", label0], ["append", label1]]);   
+        const fieldset = cretorele("fieldset", [["append", legend]]);   
+        return cretorele("div", [[null,"className", "radio-form-control mt49"], ["append", fieldset]]);
+    }
+
     const result1 = () => {  
-        const filepdf = cretorele("div", [["set","id","filepdf"], [null,"className", "container"], ["append", filename()]]);
-        const result = cretorele("div", [["set","id","result"], ["append", filepdf]]);
+        //const filepdf = cretorele("div", [["set","id","filepdf"], [null,"className", "container"], ["append", filename()]]);
+        const filepdf = cretorele("div", [["set","id","filename"]]);
+        const result = cretorele("div", [["set","id","result"], [null,"className", "container"], ["append", radioform()], ["append", filepdf]]);
         const searchResultBox = cretorele("div", [["set","id","searchResultBox"]]);
-        return adde("result1", [["append", result], ["append", searchResultBox]]);
+        return adde("result1", [ ["append", result], ["append", searchResultBox]]);
     }
 
     if (elid("searchButton") != undefined) {
@@ -244,6 +268,8 @@ const pole = (k) => {
         }
     }
 
+    
+
     if (elna("rdo")[0] != undefined) {
         const contf = elna("rdo");
         if (contf != null) {
@@ -253,6 +279,61 @@ const pole = (k) => {
             });
         }
     }
+
+    const radioform1 = (id) => {
+        if (elna("nf")[0] != undefined) {
+            const contf = elna("nf");
+            
+            if (contf != null) {
+                contf.forEach((i) => {
+                    i.addEventListener("click", () => {
+                        console.log(contf);
+                        removattr(contf, "checked");
+                        console.log(contf);
+                        stopTimes();
+                        nf(i,id);
+                        //filename();
+                        /*adde("result1", [[null, "innerHTML", ""]]);
+                        
+                        inputType0(i);*/
+                    });
+                });
+            }
+        }
+
+        if (elna("nf")[0] != undefined) {
+            const contf = elna("nf");
+            
+            if (contf != null) {
+                contf.forEach((i) => {
+                    nf(i,id);
+                    //console.log(contf);
+                   /* 
+                    inputType0(i);*/
+                });
+            }
+        }
+    }
+
+    const pole1 = (k, id) => {
+        console.log(k.value, id);
+        adde("filename", [[null, "innerHTML", ""]]);
+        
+        if (k.value === "identyfikator-wyszukiwania") {
+            adde("filename", [["append", filename(id)]]);
+        } else if (k.value === "nazwa-przyszlego-pliku") {
+            adde("filename", [["append", filename("null")]]);
+        }
+        keyclick1a();
+    }
+
+    const nf = (z, id) => {
+        if (z.checked === true) {
+            pole1(z, id);
+            z.setAttribute("checked", "checked");
+        }
+    }
+
     noNumbers();
     keyclick();
 
@@ -342,6 +423,7 @@ const pole = (k) => {
     const successinfo = (info, dat, id) => {
         stopTimes();
         timese();
+        radioform1(id);
 
         const textp = [
             "Firma (nazwa) lub imię i nazwisko",
@@ -371,7 +453,7 @@ const pole = (k) => {
         divForm.appendChild(tableHeader());
 
         statinfo.forEach((s,i) => {
-            console.log(s, i, info[s])
+            //console.log(s, i, info[s])
             if (s === "pesel") {
                 if (info[s] !== null) {
                     divForm.appendChild(tableAK(info[s], textp[i], null));
@@ -421,7 +503,7 @@ const pole = (k) => {
                 if (type === "bank-account") {
                     console.log(json);
                     if (json.message != null) {
-                        removed("filepdf");
+                        removed("result");
                         removed("searchResultBox");
                         errorinfo(json.message);
                     } else {
@@ -430,7 +512,7 @@ const pole = (k) => {
 
                             successinfo(json.result.subjects[0], dat, json.result.requestId);
                         } else {
-                            removed("filepdf");
+                            removed("result");
                             removed("searchResultBox");
                             errorinfo("Rachunek nie figuruje na wykazie");
                         }
@@ -440,7 +522,7 @@ const pole = (k) => {
                     
                     if (json.message != null) {
                         console.log(json);
-                        removed(["filepdf"]);
+                        removed(["result"]);
                         removed(["searchResultBox"]);
                         errorinfo(json.message);
                     } else {
@@ -449,7 +531,7 @@ const pole = (k) => {
                             successinfo(json.result.subject, dat, json.result.requestId);
                         } else {
                             console.log(json);
-                            removed("filepdf");
+                            removed("result");
                             removed("searchResultBox");
                             errorinfo("Nie figuruje w rejestrze VAT");
                         }
