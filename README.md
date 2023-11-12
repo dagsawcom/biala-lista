@@ -4,11 +4,9 @@ Biała lista to wyszukiwarka podatników VAT, czyli wykaz podmiotów zarejestrow
 
 # Źródła
 
-Projekt powstał na podstawie API ze strony https://www.podatki.gov.pl/wykaz-podatnikow-vat-wyszukiwarka.
-
-Kalendarz został pobrany z strony: https://kursjs.pl/kurs/date/date-calendar.
-
-Do tworzenia plików PDF zsotał kod wykorzystany ze strony https://tcpdf.org/ i https://github.com/tecnickcom/tc-lib-pdf.
+Projekt powstał na podstawie API ze strony https://www.podatki.gov.pl/wykaz-podatnikow-vat-wyszukiwarka.  
+Kalendarz został pobrany z strony: https://kursjs.pl/kurs/date/date-calendar.  
+Do tworzenia plików PDF zsotał kod wykorzystany ze strony https://tcpdf.org/ i https://github.com/tecnickcom/tc-lib-pdf.  
 
 # Użyte technologie
 
