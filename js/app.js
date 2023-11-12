@@ -350,12 +350,12 @@ const pole = (k) => {
         return tableadd(td("tableAKa"), td1, td2, td("tableAKa"), "chow");
     }
     
-    const tableHeader = () => {
-        const h4 = cretorele("h4", [[null,"className", "pw"], [null,"innerHTML", "&nbsp;&nbsp; Figuruje w rejestrze VAT"]]);
+    const tableHeader = (s, t) => {
+        const h4 = cretorele("h4", [[null,"className", "pw"], [null,"innerHTML", `&nbsp;&nbsp; ${t}`]]);
         const td = cretorele("td", [[null,"className", "tableAKa"], ["append", h4]]);
         const tr = cretorele("tr", [["append", td]]);
         const tbody = cretorele("tbody", [["append", tr]]);
-        return cretorele("table", [[null,"className", "tableHeaderAK"], ["append", tbody]])
+        return cretorele("table", [[null,"className", `tableHeaderAK${s}`], ["append", tbody]])
     }
 
     const konto = (d) => {
@@ -405,10 +405,12 @@ const pole = (k) => {
     
     const tableAK1 = (data, item, text) =>  tableadd(td("tableAKa"), tda("twofirst", twofirstb(text)), tda("twosecond", twosecondb(data, item)), td("tableAKa"), null);
 
-    const successinfo = (info, dat, id) => {
+    const successinfo = (info, dat, id, statusVat) => {
         stopTimes();
         timese();
         radioform1(id);
+
+        if (statusVat === "Niezarejestrowany") {statusVatStyle = " error"; statusVatText = "Nie figuruje w rejestrze VAT"; } else {statusVatStyle = ""; statusVatText = "Figuruje w rejestrze VAT";}
 
         const textp = [
             "Firma (nazwa) lub imię i nazwisko",
@@ -435,7 +437,7 @@ const pole = (k) => {
         const divForm = cretorele("div", [["set","id", "tableOne"], [null,"className", "container"]]);
         divForm.appendChild(modalcontent(`NAZWA: ${info.name} NIP: ${info.nip}`));
         divForm.appendChild(stan(`${dat}`));
-        divForm.appendChild(tableHeader());
+        divForm.appendChild(tableHeader(statusVatStyle, statusVatText));
 
         statinfo.forEach((s,i) => {
             if (s === "pesel") {
@@ -491,7 +493,8 @@ const pole = (k) => {
                         errorinfo(json.message);
                     } else {
                         if (json.result.subjects[0] != null) {
-                            successinfo(json.result.subjects[0], dat, json.result.requestId);
+                            successinfo(json.result.subjects[0], dat, json.result.requestId, json.result.subjects[0].statusVat);
+                            console.log(json.result.subjects[0].statusVat)
                         } else {
                             removed(["result"]);
                             removed(["searchResultBox"]);
@@ -507,7 +510,8 @@ const pole = (k) => {
                         errorinfo(json.message);
                     } else {
                         if (json.result.subject != null) {
-                            successinfo(json.result.subject, dat, json.result.requestId);
+                            successinfo(json.result.subject, dat, json.result.requestId, json.result.subject.statusVat);
+                            console.log(json.result.subject.statusVat)
                         } else {
                             removed(["result"]);
                             removed(["searchResultBox"]);
