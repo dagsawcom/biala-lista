@@ -57,11 +57,13 @@ const elem = (add, i) => {
     return add;
 }
 
-
+//Tworzenie elemetów
 const cretorele = (d, i) => elem(elc(d), i);
 
+//Dodawniw elemetów
 const adde = (d, i) => elem(elid(d), i);
 
+//Tworzenie daty i czasu
 const dates = () => {
     dateObj = new Date();
     year = dateObj.getFullYear();
@@ -79,10 +81,10 @@ const dates = () => {
 dates();
 elid("date").value = `${numDay}-${month}-${year}`
 
-
+//Tworzenie czasu
 const timese = () =>  setInterval(Timer, 500);
 
-
+//Odświerzanie daty i czasu
 const Timer = () => {
     dates();
     if (elid("serh") != null) {
@@ -92,7 +94,7 @@ const Timer = () => {
 
 const stopTimes = () => clearInterval(setInterval(Timer, 500));
 
-
+//twozrenie pól
 const pole = (k) => {
     if (k.value === "bank-account") {
         len = { max: 32, min: 9 }
