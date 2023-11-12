@@ -21,7 +21,27 @@ Do tworzenia plików PDF zsotał kod wykorzystany ze strony https://tcpdf.org/ i
 $ git clone https://github.com/dagsawcom/biala-lista
 ```
 
-Po wrzuceniu plików na serwer to trzeba etytować plik index.php i zamienić zawartość z `$files = "biala-lista/";` na `$files = "";`.
+# Edycja plków
+
+Tu są podane nazwy plików które trzeba edytować
+
+### index.php - główny katalog
+
+```bash
+Zamienić zawartość z `$files = "biala-lista/";` na `$files = "";` lub na `$files = "*inna nazwa katalogu na lokolnym serwerze";.
+```
+
+### app.js - Folderze "js"
+
+```bash
+Zamienić zawartość z `const fil = "biala-lista/";` na `const fil = "";` lub na `const fil = "*inna nazwa katalogu na lokolnym serwerze";.
+```
+
+### addpdf.inc.php - Folderze "include"
+
+```bash
+Dodać własną lokalizacje dla pliku `tcpdf_include.php` przed `$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);`.
+```
 
 # Strona na żywo
 

@@ -1,6 +1,6 @@
 const ip_local = window.location.hostname;
 const htp = window.location.protocol;
-const fil = "biala-lista";
+const fil = "biala-lista/";
 //Pobieranie portu jeśli jest.
 const ports = () => {
     const ports = window.location.port;
@@ -573,7 +573,7 @@ const keyclick1a = () => {
             }
         };
 
-            const url1 = `${htp}//${ip_local}${ports()}/${fil}/files/addpdf`;
+            const url1 = `${htp}//${ip_local}${ports()}/${fil}files/addpdf`;
             fetch(url1, options)
                 .then(response => response.text())
                 .then(() => {
@@ -584,7 +584,7 @@ const keyclick1a = () => {
 
     const openfile = (np, datt) => {
         setTimeout(() => {
-            const urlp = `${htp}//${ip_local}${ports()}/${fil}/files/view/${np} ${datt}`;
+            const urlp = `${htp}//${ip_local}${ports()}/${fil}files/view/${np} ${datt}`;
             window.open(urlp);
         }, 300);
         setTimeout(() => {
@@ -602,7 +602,7 @@ const keyclick1a = () => {
                 'Content-Type': 'text/html'
             }
         };
-        const url = `${htp}//${ip_local}${ports()}/${fil}/files/del`;
+        const url = `${htp}//${ip_local}${ports()}/${fil}files/del`;
         fetch(url, options)
             .then(response => response.text())
             .then(() => {
