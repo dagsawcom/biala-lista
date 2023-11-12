@@ -18,5 +18,9 @@ Do tworzenia plików PDF zsotał kod wykorzystany ze strony https://tcpdf.org/ i
 # Instalacja
 ```bash
 # Sklonuj to repozytorium
-$ git clone https://github.com/amitmerchant1990/pomolectron
+$ git clone https://github.com/dagsawcom/biala-lista
 ```
+
+# Strona na żywo
+
+https://bl.scripts24.xyz/
