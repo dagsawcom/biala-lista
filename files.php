@@ -10,7 +10,7 @@ $plik = isset($data['pli']) ? $data['pli'] : '';
 $dat = isset($data['dat']) ? $data['dat'] : '';
 $name = $plik." ".$dat;
 
-$storeFolder = "/test" ;
+$storeFolder = "/pdf" ;
 $targetPath = dirname( __FILE__ ) ;
 $filef = $targetPath;
 

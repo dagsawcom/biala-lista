@@ -263,7 +263,7 @@ $pdf->lastPage();
 
 //Close and output PDF document
 // $pdf->Output('example_061.pdf', 'I');
-//echo $_SERVER['DOCUMENT_ROOT'].'/test/'.$fn.'.pdf';
+//echo $_SERVER['DOCUMENT_ROOT'].'/pdf/'.$fn.'.pdf';
 //echo "$c$cp/$fn.pdf";
 $pdf->Output("$fn.pdf", 'I');
 $pdf->Output("$c$cp/$fn.pdf", 'F');
