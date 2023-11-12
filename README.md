@@ -21,6 +21,8 @@ Do tworzenia plików PDF zsotał kod wykorzystany ze strony https://tcpdf.org/ i
 $ git clone https://github.com/dagsawcom/biala-lista
 ```
 
+Po wrzuceniu plików na serwer to trzeba etytować plik index.php i zamienić zawartość z `$files = "biala-lista/";` na `$files = "";`.
+
 # Strona na żywo
 
 https://bl.scripts24.xyz/
