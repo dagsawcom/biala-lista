@@ -8,8 +8,8 @@ $htp = 'http';
 }
 $htp0 = $htp."://";
 //phpinfo();
-$files = "biala-lista/";
-$files1 = $_SERVER['DOCUMENT_ROOT'].'/'.$files;
+$files = $_SERVER['REQUEST_URI'];
+$files1 = $_SERVER['DOCUMENT_ROOT'].$files;
 
 ?>
 

@@ -25,18 +25,6 @@ $ git clone https://github.com/dagsawcom/biala-lista
 
 Tu są podane nazwy plików które trzeba edytować
 
-### index.php - główny katalog
-
-```bash
-Zamienić zawartość z `$files = "biala-lista/";` na `$files = "";` lub na `$files = "*inna nazwa katalogu na lokolnym serwerze";.
-```
-
-### app.js - Folderze "js"
-
-```bash
-Zamienić zawartość z `const fil = "biala-lista/";` na `const fil = "";` lub na `const fil = "*inna nazwa katalogu na lokolnym serwerze";.
-```
-
 ### addpdf.inc.php - Folderze "include"
 
 ```bash
