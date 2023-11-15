@@ -1,6 +1,6 @@
 const ip_local = window.location.hostname;
 const htp = window.location.protocol;
-const fil = window.location.pathname;;
+const pathname = window.location.pathname;
 console.log(window.location);
 //Pobieranie portu jeśli jest.
 const ports = () => {
@@ -119,12 +119,13 @@ const dataSelection = (k) => {
     }
 
 
-
+    //Jakie pole zostało wybrane
     const check = (l) => {
         if (l[0] != undefined) {
             if (l != null) {
                 for (let i = 0; i < l.length; i++) {
                     if (l[i].checked == true) {
+                        console.log(l[i].dataset.type);
                         return l[i].dataset.type;
                     }
                 }
@@ -132,6 +133,7 @@ const dataSelection = (k) => {
         }
     }
 
+    //Mozliwość pisania tylko samych cyfr
     const noNumbers = () =>  {
         if (elid("inputType") != undefined) {
                 elid("inputType").addEventListener("input", e => {
@@ -148,7 +150,8 @@ const dataSelection = (k) => {
         }
     }
 
-    const bank = (nr) => {
+    //Format konta bankowego
+    const accountNumber = (nr) => {
         const boxg = nr.replace(/\s/g, '');
          lk = '';
         const ll0 = boxg.slice(0, 2);
@@ -164,12 +167,13 @@ const dataSelection = (k) => {
         return lk;
     }
 
+    //Pole input dla konta bankowego
     const inputType0 = (p) => {
         if (p.value === "bank-account") {
             if (elid("inputType") != undefined) {
                 elid("inputType").addEventListener("keydown", e => {
                     if (p.checked == true) {
-                        e.target.value = bank(e.target.value);
+                        e.target.value = accountNumber(e.target.value);
                     }
                 });
             }
@@ -188,7 +192,7 @@ const dataSelection = (k) => {
         sendmu(check(elna("rdo")), val, dat);
     }
 
-
+    //Gotowa lub wmyślona nazwa pluku z datą
     const filename = (id) => { 
         if (id == "null") {
             input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"placeholder", "Nazwa przyszłego pliku"] ]);
@@ -211,7 +215,7 @@ const dataSelection = (k) => {
             const input = cretorele("input", [[null,"type", "radio"], ["set","id",`${n}${w+1}`], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", `${t[w]}`], [null,"value", `${t[w]}`], [null,"aria-label", `${h[w]}`], [null,"title", `${h[w]}`], ch]);
             const span = cretorele("span", [[null,"className", "control-label"], [null,"title", `${h[w]}`]]);
             const spana = cretorele("span", [[null, "innerHTML", `${h[w]}`]]);
-            label = cretorele("label", [[null,"for", `${n}${w+1}`], [null,"className", "radio-control-container"], [null,"title", `${h[w]}`], ["append", input], ["append", span], ["append", spana]]);
+            const label = cretorele("label", [[null,"for", `${n}${w+1}`], [null,"className", "radio-control-container"], [null,"title", `${h[w]}`], ["append", input], ["append", span], ["append", spana]]);
             legend.appendChild(label);
         })
  
@@ -305,6 +309,7 @@ const dataSelection = (k) => {
         }
     }
 
+    //Określenie przyszłej nazwy pliku
     const selectFilename = (k, id) => {
         console.log(k.value, id);
         adde("filename", [[null, "innerHTML", ""]]);
@@ -333,14 +338,16 @@ const dataSelection = (k) => {
     const tda = (className, a) => cretorele("td", [[null,"className", className], ["append", a]]);
     const tdi = (className, data) => cretorele("td", [[null,"className", className], [null,"innerHTML", data]]); 
 
-    const modalcontent = (d) => {    
-        const div = cretorele("div", [["set","id","exampleModalScrollableTitle"], [null,"className", "modal-title"], [null,"innerHTML", d]]);
+    //Tworzenie tabeli z nazwą firmy i NIP-em
+    const importantData = (data) => {    
+        const div = cretorele("div", [[null,"className", "modal-title"], [null,"innerHTML", data]]);
         const td = cretorele("td", [[null,"className", "modal-header"], ["append", div]]);
         const tr = cretorele("tr", [["append", td]]);
         const tbody = cretorele("tbody", [["append", tr]]);
         return cretorele("table", [["set","id","chow"], [null,"className", "modal-content"], ["append", tbody]]);
     }
     
+    //Tworzenie tabel z danymi
     const tableadd = (td0, td1, td2, td3, id) => {
         id ? chow = ["set","id","chow"] : chow = [];
 
@@ -450,7 +457,7 @@ const dataSelection = (k) => {
         const statinfo = ["name", "nip", "pesel", "statusVat", "regon", "krs", "workingAddress", "residenceAddress", "authorizedClerks", "representatives", "partners", "accountNumbers", "hasVirtualAccounts", "registrationLegalDate", ["registrationDenialDate", "registrationDenialBasis"], ["removalDate", "removalBasis"], ["restorationDate", "restorationBasis"]];
     
         const divForm = cretorele("div", [["set","id", "tableOne"], [null,"className", "container"]]);
-        divForm.appendChild(modalcontent(`NAZWA: ${info.name} NIP: ${info.nip}`));
+        divForm.appendChild(importantData(`NAZWA: ${info.name} NIP: ${info.nip}`));
         divForm.appendChild(state(`${dat}`));
         divForm.appendChild(tableHeader(statusVatStyle, statusVatText));
 
@@ -589,7 +596,7 @@ const keyclick1a = () => {
             }
         };
 
-            const url1 = `${htp}//${ip_local}${ports()}${fil}files/addpdf`;
+            const url1 = `${htp}//${ip_local}${ports()}${pathname}files/addpdf`;
             fetch(url1, options)
                 .then(response => response.text())
                 .then(() => {
@@ -600,7 +607,7 @@ const keyclick1a = () => {
 
     const openfile = (np, datt) => {
         setTimeout(() => {
-            const urlp = `${htp}//${ip_local}${ports()}${fil}files/view/${np} ${datt}`;
+            const urlp = `${htp}//${ip_local}${ports()}${pathname}files/view/${np} ${datt}`;
             window.open(urlp);
         }, 300);
         setTimeout(() => {
@@ -618,7 +625,7 @@ const keyclick1a = () => {
                 'Content-Type': 'text/html'
             }
         };
-        const url = `${htp}//${ip_local}${ports()}${fil}files/del`;
+        const url = `${htp}//${ip_local}${ports()}${pathname}files/del`;
         fetch(url, options)
             .then(response => response.text())
             .then(() => {
