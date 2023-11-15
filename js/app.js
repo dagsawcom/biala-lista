@@ -95,7 +95,7 @@ const Timer = () => {
 const stopTimes = () => clearInterval(setInterval(Timer, 500));
 
 //twozrenie pól
-const pole = (k) => {
+const dataSelection = (k) => {
     if (k.value === "bank-account") {
         len = { max: 32, min: 9 }
     } else if (k.value === "nip") {
@@ -110,7 +110,7 @@ const pole = (k) => {
 
     const rdo = (z) => {
         if (z.checked === true) {
-            pole(z);
+            dataSelection(z);
             z.setAttribute("checked", "checked");
         }
     }
@@ -302,7 +302,7 @@ const pole = (k) => {
         }
     }
 
-    const pole1 = (k, id) => {
+    const selectFilename = (k, id) => {
         console.log(k.value, id);
         adde("filename", [[null, "innerHTML", ""]]);
         
@@ -316,7 +316,7 @@ const pole = (k) => {
 
     const nf = (z, id) => {
         if (z.checked === true) {
-            pole1(z, id);
+            selectFilename(z, id);
             z.setAttribute("checked", "checked");
         }
     }
@@ -431,7 +431,7 @@ const pole = (k) => {
             "Data rejestracji jako podatnika VAT",
             ["Data odmowy rejestracji jako podatnika VAT", "Podstawa prawna odmowy rejestracji"],
             ["Data wykreślenia rejestracji jako podatnika VAT", "Podstawa prawna wykreślenia"],
-            ["ata przywrócenia rejestracji jako podatnika VAT", "Podstawa prawna przywrócenia"]
+            ["Data przywrócenia rejestracji jako podatnika VAT", "Podstawa prawna przywrócenia"]
         ];
     
         const statinfo = ["name", "nip", "pesel", "statusVat", "regon", "krs", "workingAddress", "residenceAddress", "authorizedClerks", "representatives", "partners", "accountNumbers", "hasVirtualAccounts", "registrationLegalDate", ["registrationDenialDate", "registrationDenialBasis"], ["removalDate", "removalBasis"], ["restorationDate", "restorationBasis"]];
