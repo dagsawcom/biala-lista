@@ -95,7 +95,7 @@ const Timer = () => {
 
 const stopTimes = () => clearInterval(setInterval(Timer, 500));
 
-//twozrenie pól
+//tworzenie pól wyborów
 const dataSelection = (k) => {
     if (k.value === "bank-account") {
         len = { max: 32, min: 9 }
@@ -109,6 +109,8 @@ const dataSelection = (k) => {
     adde("inputType", [[null, "placeholder", k.title],["set", "maxlength", max],["set", "minlength", min],[null, "value", ""]]);
 }
 
+
+    //Które pole zostało wybrane
     const rdo = (z) => {
         if (z.checked === true) {
             dataSelection(z);
@@ -327,9 +329,9 @@ const dataSelection = (k) => {
 
 
 
-    const td = (c) => cretorele("td", [[null,"className", c]]);
-    const tda = (c, a) => cretorele("td", [[null,"className", c], ["append", a]]);
-    const tdi = (c, t) => cretorele("td", [[null,"className", c], [null,"innerHTML", t]]);
+    const td = (className) => cretorele("td", [[null,"className", className]]);
+    const tda = (className, a) => cretorele("td", [[null,"className", className], ["append", a]]);
+    const tdi = (className, data) => cretorele("td", [[null,"className", className], [null,"innerHTML", data]]); 
 
     const modalcontent = (d) => {    
         const div = cretorele("div", [["set","id","exampleModalScrollableTitle"], [null,"className", "modal-title"], [null,"innerHTML", d]]);
@@ -347,12 +349,14 @@ const dataSelection = (k) => {
         return cretorele("table", [chow, [null,"className", "tableAK"], ["append", tbody]]);
     }
     
-    const stan = (d) => {
+    //Stan danych na określony dzień
+    const state = (d) => {
         const td1 = cretorele("td", [["set","id","sers"], [null,"className", "twofirst1"], [null,"innerHTML", `Stan na dzień: ${d}`]]);
         const td2 = cretorele("td", [["set","id","serh"], [null,"className", "twosecond"]]);
         return tableadd(td("tableAKa"), td1, td2, td("tableAKa"), "chow");
     }
     
+    //Status podatnika
     const tableHeader = (s, t) => {
         const h4 = cretorele("h4", [[null,"className", "pw"], [null,"innerHTML", `&nbsp;&nbsp; ${t}`]]);
         const td = cretorele("td", [[null,"className", "tableAKa"], ["append", h4]]);
@@ -361,7 +365,8 @@ const dataSelection = (k) => {
         return cretorele("table", [[null,"className", `tableHeaderAK${s}`], ["append", tbody]])
     }
 
-    const konto = (d) => {
+    //Tworznie struktury do wyświetlina infomacji o kontach bankowy
+    const account = (d) => {
         const div = cretorele("div", [[null,"className", "count1"]]);
         d.forEach((i) => {
             const o = `${i.substring(0, 2)} ${i.substring(2, 6)} ${i.substring(6, 10)} ${i.substring(10, 14)} ${i.substring(14, 18)} ${i.substring(18, 22)} ${i.substring(22, 26)}`;
@@ -371,6 +376,7 @@ const dataSelection = (k) => {
         return div;
     }
 
+    //Lewa tabela informacji
     const twofirstb = (d) => {
         const div = elc('div');
         d.forEach((i) => {
@@ -380,6 +386,7 @@ const dataSelection = (k) => {
         return div;
     }
 
+    //Prawa tabela infomacji
     const twosecondb = (d, i) => {
         const div = cretorele("div", [[null,"className", "rtext"]]);
         i.forEach((x) => {
@@ -390,6 +397,7 @@ const dataSelection = (k) => {
         return div;
     }
 
+    //Tworzenie głównych informacji 
     const tableAK = (data, text, classi) => {
         classi ? chow = ['counta1','twofirst count', 'twosecond count'] : chow = ['tableAKa', 'twofirst', 'twosecond'];
         data ? classi ? chow2b = [] : chow2b = ["style","fontWeight", "normal"] : chow2b = ["style","fontWeight", "normal"];
@@ -397,17 +405,21 @@ const dataSelection = (k) => {
         if ((data == null) || (data == "null") || (data == "")) {
             chow2a = [null,"innerHTML", "-"];      
         } else {         
-            classi ? chow2a = ["append", konto(data)] : chow2a = [null,"innerHTML", data]
+            classi ? chow2a = ["append", account(data)] : chow2a = [null,"innerHTML", data]
         }
 
         const td2 = cretorele("td", [[null,"className", chow[2]], ["set","valign","middle"], chow2a, chow2b]);
         return tableadd(td(chow[0]), tdi(chow[1], text), td2, td(chow[0]), null);
     }
 
-    const tableAK2 = data => tableadd(td("countSpecial1"), tdi("twofirst countSpecial", data), tdi("twosecond countSpecialLas", ""), td("countSpecial1"), null);
-    
+    //Tworzenie pozostałych informacji 
     const tableAK1 = (data, item, text) =>  tableadd(td("tableAKa"), tda("twofirst", twofirstb(text)), tda("twosecond", twosecondb(data, item)), td("tableAKa"), null);
 
+    //Tworzenie infomacji o kontach wituralnych
+    const tableAK2 = data => tableadd(td("countSpecial1"), tdi("twofirst countSpecial", data), tdi("twosecond countSpecialLast", ""), td("countSpecial1"), null);
+    
+    
+    //Wyciągnięcie prawidłowych danaych z API
     const successinfo = (info, dat, id, statusVat) => {
         stopTimes();
         timese();
@@ -439,7 +451,7 @@ const dataSelection = (k) => {
     
         const divForm = cretorele("div", [["set","id", "tableOne"], [null,"className", "container"]]);
         divForm.appendChild(modalcontent(`NAZWA: ${info.name} NIP: ${info.nip}`));
-        divForm.appendChild(stan(`${dat}`));
+        divForm.appendChild(state(`${dat}`));
         divForm.appendChild(tableHeader(statusVatStyle, statusVatText));
 
         statinfo.forEach((s,i) => {
@@ -456,6 +468,7 @@ const dataSelection = (k) => {
             } else {
                 if (s.length === 2) {
                     divForm.appendChild(tableAK1(info, s, textp[i]));
+                    console.log(info, s, textp[i])
                 } else {
                     divForm.appendChild(tableAK(info[s], textp[i], null));
                 }
@@ -471,6 +484,7 @@ const dataSelection = (k) => {
         adde("searchResultBox", [["append", divForm]]);
     }
 
+    //Wyświetlanie błędu
     const errorinfo = (info) => {
 
         stopTimes();
@@ -482,6 +496,7 @@ const dataSelection = (k) => {
         adde("result1", [["append", errorBox]]);
     }
 
+    //Pobieranie danych z API
     const sendmu = (type, val, dat) => {
         let url = new URL(`https://wl-api.mf.gov.pl/api/search/${type}/${val}`),
             params = { date: dat }
