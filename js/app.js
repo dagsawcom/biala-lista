@@ -333,6 +333,7 @@ const dataSelection = (k) => {
     keyclick();
 
 
+    /*Początek modułu związanym z pobieraniem danych z api i przetwarzaniem tych danych jako tabela*/
 
     const td = (className) => cretorele("td", [[null,"className", className]]);
     const tda = (className, a) => cretorele("td", [[null,"className", className], ["append", a]]);
@@ -551,6 +552,12 @@ const dataSelection = (k) => {
 
     }
 
+
+    /*Koniec modułu związanym z pobieraniem danych z api i przetwarzaniem tych danych jako tabela*/
+
+
+    /*Początek modułu związanym z tworzeniem, otwieraniem oraz usuwaniem pliku pdf*/
+
     const filec = () => {
         const divToPrint = elid("searchResultBox").innerHTML;
         const np = elid("files").value;
@@ -567,13 +574,14 @@ const dataSelection = (k) => {
         cretorfile(se, np, datt);
     }
 
-const keyclick1a = () => {
-    if (elid("searchButton2") != undefined) {
-            elid("searchButton2").addEventListener("click", () => {
-            filec();
-        });
+    const keyclick1a = () => {
+        if (elid("searchButton2") != undefined) {
+                elid("searchButton2").addEventListener("click", () => {
+                filec();
+            });
+        }
     }
-}
+    
     const keyclick1 = () => {
         if (elid("files") != undefined) {
             elid("files").addEventListener("keydown", event => {    
@@ -586,6 +594,7 @@ const keyclick1a = () => {
 
 
     keyclick1();
+
 
     const cretorfile = (se, np, datt) => {
         const options = {
@@ -632,3 +641,5 @@ const keyclick1a = () => {
             })
             .catch(error => console.log('błąd: ', error));
     }
+
+    /*Koniec modułu związanym z tworzeniem, otwieraniem oraz usuwaniem pliku pdf*/
