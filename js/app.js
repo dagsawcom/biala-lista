@@ -1,7 +1,8 @@
 const ip_local = window.location.hostname;
 const htp = window.location.protocol;
 const pathname = window.location.pathname;
-console.log(window.location);
+//console.log(window.location);
+
 //Pobieranie portu jeśli jest.
 const ports = () => {
     const ports = window.location.port;
@@ -251,7 +252,7 @@ const dataSelection = (k) => {
     noNumbers();
     keyclick();
 
- /*Początek modułu związanym z pobieraniem nazwy pliku z api lub wmyślona nazwa pliku z datą*/
+/*Początek modułu związanym z pobieraniem nazwy pliku z api lub wmyślona nazwa pliku z datą*/
 
     //Gotowa lub wmyślona nazwa pliku z datą
     const filename = (id) => { 
@@ -299,7 +300,7 @@ const dataSelection = (k) => {
                     i.addEventListener("click", () => {
                         removattr(contf, "checked");
                         stopTimes();
-                        console.log(i,id);
+                        //console.log(i,id);
                         nameFiles(i,id);
                     });
                 });
@@ -310,7 +311,7 @@ const dataSelection = (k) => {
             const contf = elna("nf");        
             if (contf != null) {
                 contf.forEach((i) => {
-                    console.log(i,id);
+                    //console.log(i,id);
                     nameFiles(i,id);
                 });
             }
@@ -319,7 +320,7 @@ const dataSelection = (k) => {
 
     //Określenie przyszłej nazwy pliku
     const selectFilename = (k, id) => {
-        console.log(k.value, id);
+        //console.log(k.value, id);
         adde("filename", [[null, "innerHTML", ""]]);
         
         if (k.value === "identyfikator-wyszukiwania") {
@@ -338,7 +339,7 @@ const dataSelection = (k) => {
     }
 
     
- /*Koniex modułu związanym z pobieraniem nazwy pliku z api lub wmyślona nazwa pliku z datą*/
+ /*Koniec modułu związanym z pobieraniem nazwy pliku z api lub wmyślona nazwa pliku z datą*/
 
 /*Początek modułu związanym z pobieraniem danych z api i przetwarzaniem tych danych jako tabela*/
 
@@ -483,7 +484,7 @@ const dataSelection = (k) => {
             } else {
                 if (s.length === 2) {
                     divForm.appendChild(tableAK1(info, s, textp[i]));
-                    console.log(info, s, textp[i])
+                    //console.log(info, s, textp[i])
                 } else {
                     divForm.appendChild(tableAK(info[s], textp[i], null));
                 }
@@ -527,7 +528,7 @@ const dataSelection = (k) => {
                     } else {
                         if (json.result.subjects[0] != null) {
                             successinfo(json.result.subjects[0], dat, json.result.requestId, json.result.subjects[0].statusVat);
-                            console.log(json.result.subjects[0].statusVat)
+                            //console.log(json.result.subjects[0].statusVat)
                         } else {
                             removed(["result"]);
                             removed(["searchResultBox"]);
@@ -544,7 +545,7 @@ const dataSelection = (k) => {
                     } else {
                         if (json.result.subject != null) {
                             successinfo(json.result.subject, dat, json.result.requestId, json.result.subject.statusVat);
-                            console.log(json.result.subject.statusVat)
+                            //console.log(json.result.subject.statusVat)
                         } else {
                             removed(["result"]);
                             removed(["searchResultBox"]);
