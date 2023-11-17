@@ -23,7 +23,7 @@ $ git clone https://github.com/dagsawcom/biala-lista
 
 # Edycja plków
 
-Tu są podane nazwy plików które trzeba edytować
+Tu są podane nazwy plików które trzeba edytować.
 
 ### addpdf.inc.php - Folderze "include"
 
