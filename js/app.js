@@ -192,41 +192,6 @@ const dataSelection = (k) => {
         sendmu(check(elna("rdo")), val, dat);
     }
 
-    //Gotowa lub wmyślona nazwa pluku z datą
-    const filename = (id) => { 
-        if (id == "null") {
-            input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"placeholder", "Nazwa przyszłego pliku"] ]);
-        } else {
-            input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"disabled", "disabled"], [null,"value", id]]);
-        }
-        
-        const label = cretorele("label", [["append", input]]);   
-        const div0 = cretorele("div", [[null,"className", "form-container-selecta sizeInputForBigSize"], ["style", "position", "relative"], ["append", label]]);
-        const button = cretorele("input", [[null,"type", "submit"], ["set","id","searchButton2"], [null,"className", "btn btn-primaryAk searchButtonClick"],[null, "innerHTML", "Generuj PDF"] ]);
-        const div1 = cretorele("div", [[null,"className", "sendButtonAKa"], ["append", button]]);
-        return cretorele("div", [[null,"className", "m-12"], ["append", div0], ["append", div1]]);
-    }
-
-    const radioformlabel = (n, t, h) => {
-
-        legend = elc("legend");
-        t.forEach((i, w) => {
-            if (w == 0) {ch = [null,"checked", "checked"] } else {ch = "" }
-            const input = cretorele("input", [[null,"type", "radio"], ["set","id",`${n}${w+1}`], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", `${t[w]}`], [null,"value", `${t[w]}`], [null,"aria-label", `${h[w]}`], [null,"title", `${h[w]}`], ch]);
-            const span = cretorele("span", [[null,"className", "control-label"], [null,"title", `${h[w]}`]]);
-            const spana = cretorele("span", [[null, "innerHTML", `${h[w]}`]]);
-            const label = cretorele("label", [[null,"for", `${n}${w+1}`], [null,"className", "radio-control-container"], [null,"title", `${h[w]}`], ["append", input], ["append", span], ["append", spana]]);
-            legend.appendChild(label);
-        })
- 
-        return legend;
-        
-    }
-
-    const radioform = () => {  
-        const fieldset = cretorele("fieldset", [["append", radioformlabel("nf", ["identyfikator-wyszukiwania", "nazwa-przyszlego-pliku"], ["Identyfikator wyszukiwania", "Nazwa przyszłego pliku"])]]);   
-        return cretorele("div", [[null,"className", "radio-form-control mt49"], ["append", fieldset]]);
-    }
 
     const result1 = () => {  
         const filepdf = cretorele("div", [["set","id","filename"]]);
@@ -283,6 +248,48 @@ const dataSelection = (k) => {
         }
     }
 
+    noNumbers();
+    keyclick();
+
+ /*Początek modułu związanym z pobieraniem nazwy pliku z api lub wmyślona nazwa pliku z datą*/
+
+    //Gotowa lub wmyślona nazwa pliku z datą
+    const filename = (id) => { 
+        if (id == "null") {
+            input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"placeholder", "Nazwa przyszłego pliku"] ]);
+        } else {
+            input = cretorele("input", [[null,"type", "text"], ["set","id","files"], [null,"name", "files"], [null,"className", "input-form dateInput"],[null,"disabled", "disabled"], [null,"value", id]]);
+        }
+        
+        const label = cretorele("label", [["append", input]]);   
+        const div0 = cretorele("div", [[null,"className", "form-container-selecta sizeInputForBigSize"], ["style", "position", "relative"], ["append", label]]);
+        const button = cretorele("input", [[null,"type", "submit"], ["set","id","searchButton2"], [null,"className", "btn btn-primaryAk searchButtonClick"],[null, "innerHTML", "Generuj PDF"] ]);
+        const div1 = cretorele("div", [[null,"className", "sendButtonAKa"], ["append", button]]);
+        return cretorele("div", [[null,"className", "m-12"], ["append", div0], ["append", div1]]);
+    }
+
+    const radioformlabel = (n, t, h) => {
+
+        legend = elc("legend");
+        t.forEach((i, w) => {
+            if (w == 0) {ch = [null,"checked", "checked"] } else {ch = "" }
+            const input = cretorele("input", [[null,"type", "radio"], ["set","id",`${n}${w+1}`], [null,"name", "nf"], [null,"className", "hidden1 radioAK"], [null,"data-type", `${t[w]}`], [null,"value", `${t[w]}`], [null,"aria-label", `${h[w]}`], [null,"title", `${h[w]}`], ch]);
+            const span = cretorele("span", [[null,"className", "control-label"], [null,"title", `${h[w]}`]]);
+            const spana = cretorele("span", [[null, "innerHTML", `${h[w]}`]]);
+            const label = cretorele("label", [[null,"for", `${n}${w+1}`], [null,"className", "radio-control-container"], [null,"title", `${h[w]}`], ["append", input], ["append", span], ["append", spana]]);
+            legend.appendChild(label);
+        })
+ 
+        return legend;
+        
+    }
+
+    const radioform = () => {  
+        const fieldset = cretorele("fieldset", [["append", radioformlabel("nf", ["identyfikator-wyszukiwania", "nazwa-przyszlego-pliku"], ["Identyfikator wyszukiwania", "Nazwa przyszłego pliku"])]]);   
+        return cretorele("div", [[null,"className", "radio-form-control mt49"], ["append", fieldset]]);
+    }
+
+    
     const radioform1 = (id) => {
         if (elna("nf")[0] != undefined) {
             const contf = elna("nf");
@@ -292,7 +299,8 @@ const dataSelection = (k) => {
                     i.addEventListener("click", () => {
                         removattr(contf, "checked");
                         stopTimes();
-                        nf(i,id);
+                        console.log(i,id);
+                        nameFiles(i,id);
                     });
                 });
             }
@@ -302,8 +310,8 @@ const dataSelection = (k) => {
             const contf = elna("nf");        
             if (contf != null) {
                 contf.forEach((i) => {
-                    nf(i,id);
-
+                    console.log(i,id);
+                    nameFiles(i,id);
                 });
             }
         }
@@ -322,18 +330,17 @@ const dataSelection = (k) => {
         keyclick1a();
     }
 
-    const nf = (z, id) => {
+    const nameFiles = (z, id) => {
         if (z.checked === true) {
             selectFilename(z, id);
             z.setAttribute("checked", "checked");
         }
     }
 
-    noNumbers();
-    keyclick();
+    
+ /*Koniex modułu związanym z pobieraniem nazwy pliku z api lub wmyślona nazwa pliku z datą*/
 
-
-    /*Początek modułu związanym z pobieraniem danych z api i przetwarzaniem tych danych jako tabela*/
+/*Początek modułu związanym z pobieraniem danych z api i przetwarzaniem tych danych jako tabela*/
 
     const td = (className) => cretorele("td", [[null,"className", className]]);
     const tda = (className, a) => cretorele("td", [[null,"className", className], ["append", a]]);
@@ -581,7 +588,7 @@ const dataSelection = (k) => {
             });
         }
     }
-    
+
     const keyclick1 = () => {
         if (elid("files") != undefined) {
             elid("files").addEventListener("keydown", event => {    
